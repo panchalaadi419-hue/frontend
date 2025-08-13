@@ -1,0 +1,175 @@
+module-9 introduction of react.js
+thoery exercise
+question 1: what is react.js?how is it different from other javascript frameworks and libraries?
+- react.js is an open-source javascript library for building user interfaces uis maintained by meta
+facebook.it focuses specifically the view layer of web applications,allowing developers to create
+interactive and dynamic uis efficiently.
+
+different from other javascript framework and libraries
+focus (library vs framework):
+react is primary a liabrary for ui development ,meaning it provide tools for building the visual componentbut leaves other aspects like routing or state managment to be handled by other libraries of custom solutions.
+
+virtual dom:react utilize a virtual dom a lightweight in-memory represention of the actual dom when the data changes react first updates the 
+virtual dom then efficiently calculates the difference and updates necessary part of the real dom for better performance compar to direct dom manipulation.
+
+component-based architecture:
+react emphasizes a component-based architecture, where uis are broken down into small, reusable, and self-contained components.
+ this promotes modularity, reusability, and easier management of complex UIs 
+
+Declarative approach:
+React employs a declarative programming paradigm, where developers describe what the UI should look like for a given state, and React handles how to achieve that state. This contrasts with imperative approaches where developers explicitly instruct the system step-by-step
+
+Unidirectional Data Flow:
+React typically follows a unidirectional data flow, where data flows in one direction (from parent components to child components). This simplifies state management and makes it easier to understand and debug data changes. Frameworks like Angular often support two-way data binding
+
+jsx:
+react often uses jsx (javascript xml), a syntax extension that allows developers to write html-like code within JavaScript, making component creation more intuitive and readable. While not strictly required, it's a common and highly favored practice in React development.
+
+question-2:explain the core principles of react such as the virtual dom and componentbased architecture
+-react's core principles revolve around two key concepts: the Virtual dom and component-based architecture
+
+virtual dom:the virtual dom is a lightweight, in-memory representation of the actual browser dom. Instead of directly manipulating the slow real dom , react creates a virtual dom. when a component's state changes, react builds a new virtual dom  tree and efficiently compares it with the previous one. It then calculates the minimal set of changes required and updates only those specific parts of the real dom, leading to faster and more efficient ui  updates
+component based architecture:react promotes building user interfaces by breaking them down into small, self-contained, and reusable pieces called components. each component manages its own state and props (properties passed from parent components). this modular approach offers several benefits
+
+reusability:
+Components can be reused across different parts of an application, reducing code duplication.
+modularity:
+Complex UIs are broken into manageable units, making development and debugging easier.
+Maintainability:
+Changes within one component are less likely to affect others, simplifying updates and bug fixes.
+scalability:
+Applications can grow easily by adding or modifying individual components
+
+question 3:what is the advantages of  react.js in web development
+-the advantages of using react.js in web development include: 
+component reusability:
+react's component-based architecture enables the creation of reusable ui components, accelerating development and improving code maintainability.
+
+
+virtual dom for performance:
+react utilizes a virtual dom, which efficiently updates the actual dom, leading to faster rendering and improved application performance, especially in dynamic applications.
+
+
+enhanced developer productivity:
+features like reusable components, a declarative programming style, and a robust developer toolset streamline the development process and boost productivity.
+
+
+strong eommunity and ecosystem:
+Backed by Meta (formerly Facebook), React boasts a large and active community, providing extensive resources, libraries, and tools for developers.
+
+
+flexibility and Integration:
+react offers flexibility in integrating with other libraries and frameworks, allowing developers to choose the best tools for their specific project needs.
+
+
+seo  friendliness:
+react applications can be optimized for search engines through server-side rendering and other techniques, improving discoverability and ranking
+
+
+                                              jsx (javascript xml)
+theory exercise
+
+question:1 what is jsx in react.js?why is it used?
+-jsx stands  for javascript xml. It is a syntax extension for javascript used within react.js to describe the structure of user interfaces. In essence, jsx  allows developers to write html-like markup directly within javascript code.
+why is it used?
+jsx  is used in react to simplify the creation and management of ui components. it offers a more intuitive and readable way to define what the ui should look like compared to using pure javascript to create elements. Jsx  is then transpiled by tools like babel into standard javascript that browsers can understand, typically converting jsx elements into react.createElement()  calls. this approach combines the benefits of javascript's programmatic power with the familiar syntax of html for ui definition
+
+
+question 2:: how is jsx different from regular javascript? can you write javascript insidejsx?
+-jsx (javascript xml ) is a syntax extension for javascript that allows you to write html-like code directly within your javascript files. 
+
+
+differences from regular javascript:
+syntax:
+jsx introduces xml -like tags and attributes for defining ui  elements, which is not part of standard javascript syntax.
+purpose:
+jsx  is primarily used in libraries like react to describe the structure and appearance of user interfaces, while regular javascript handles the logic and behavior.
+transpilation:
+jsx  code is not directly executable by browsers; it requires a transpiler (like babel) to convert it into regular javascript react.createElement() calls before execution.
+writing javascript inside jsx:
+yes, you can write javascript expressions inside jsx  by enclosing them within curly braces{} . this allows you to embed variables, function calls, and other javascript logic directly within your ui  structure
+
+question 3: discuss the importance of using curly braces {}in jsx expressions
+-curly braces in jsx are the syntactic sugar that sweetens the development process. the indicators tell react to interpret the enclosed content as javascript, not plain text. this allows developers to embed variables, function calls, and other javascript expressions directly within their jsx code
+
+
+                                   components (functional & class components)
+theory exercise
+question 1: what are components in react? explain the difference between functional components and class components
+-in react, components are independent, reusable pieces of code that serve as the building blocks for user interfaces. they encapsulate their own logic and appearance, making ui development modular and manageable.
+functional components vs. class components
+
+
+historically, react offered two primary ways to define components: functional components and class components. while both serve the same purpose of rendering ui, they differ significantly in their syntax, state management, and lifecycle handling.
+
+1. functional components:
+syntax:
+defined as plain javascript functions that accept  (properties) props as an argument and return jsx.
+state management:
+originally stateless, but with the introduction of react hooks (e.g.usestate ,useEffect,), functional components can now manage local state and side effects.
+lifecycle:
+do not have traditional lifecycle methods but can achieve similar functionality using hooks like useEffect 
+conciseness:
+generally more concise and easier to read, especially for simpler components
+
+
+2. class components:
+syntax:
+defined as es6 classes that extend react.component . they require a render ()method that returns jsx.
+state management:
+Manage state using this.state  and update it with this.setstate()..
+lifecycle:
+provide a set of lifecycle methods (e.g componentdidmount. componentdidupdate,componentwillunmount ) for handling various stages of a component's life.
+complexity:
+can be more verbose due to class-based syntax and the need for this  binding.
+
+
+question 2:how do you pass data to a component using props?
+-passing data to a component using props in react involves two main steps:
+passing the props from the parent component:
+when you render a child component within a parent component's jsx, you can add attributes to the child component tag. these attributes represent the props you are passing.
+-accessing the props within the child component:
+in a functional component, the props are received as the first argument to the component function, typically named props. you can then access individual prop values using dot notation.
+
+question 3: what is the role of render() in class components?
+-the render()  method is a crucial part of react class components, serving as the primary mechanism for defining and displaying the component's user interface
+
+                                                 props and state
+Theory exercise
+question 1: what are props in react.js? how are props different from state?
+-in react.js, props (short for properties) are a mechanism for passing data from a parent component to a child component. they are read-only and immutable within the child component, meaning a child component cannot directly modify the props it receives. props facilitate a unidirectional data flow, ensuring data consistency and predictability.
+state, on the other hand, is an internal data store within a component that can be managed and updated by that component itself. state is mutable, meaning its values can change over time, triggering a re-render of the component and its children to reflect the updated data.
+ differences:
+mutability: props are immutable (read-only), while state is mutable.
+
+
+ownership: props are owned by the parent component and passed down, while state is owned and managed by the component itself. 
+
+
+purpose: props are used for passing data and configuration, while state is used for managing component-specific, dynamic data that changes over time
+
+
+question 2: explain the concept of state in react and how it is used to manage component data
+-in react, state is a javascript object that represents the internal data of a component, allowing it to manage and store information that can change over time. this data directly influences the component's rendering and behavior. when a component's state changes, react automatically re-renders the component to reflect the updated information in the ui.
+
+how it is used to manage component data:
+declaring and Initializing state:
+ functional components using hooks:the usestate  hook is used to declare state variables in functional components. It returns an array containing the current state value and a function to update it
+class components: state is initialized within the constructor   method as an object assigned to this.state .
+accessing state:
+functional components: the state variable declared with usestate  can be directly accessed.
+class component: state properties are accessed using this.state.propertyname.
+
+question 3: why is this.setState() used in class components, and how does it work?
+-this.setstate()  is used in react class components to update the component's state and trigger a re-render of the component and its children.
+how it works:
+enques changes: when this.setstate() is called, it enqueues the provided state changes. react does not immediately update the state; instead, it batches multiple setstate()  calls for performance.
+
+
+merge state: eact then performs a shallow merge of the new state with the current state. this means only the properties you specify in setstate() are updated, while other state properties remain unchanged.
+
+
+ triggers re-render : after the state is updated, react detects the change and schedules a re-render of the component. this involves calling the render()  method, which re-evaluates the component's jsx and updates the dom to reflect the new state.
+
+
+
