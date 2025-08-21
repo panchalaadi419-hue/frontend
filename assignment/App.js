@@ -24,7 +24,7 @@ function App() {
             {/* <Greeting name="vivek"/> */}
             {/* <Welcome/> */}
             {/* <Usercard name="vivek" age="21" location="ahmedabad"/> */}
-            // <Counter/>
+            {/*<Counter/>*/}
 
          <Routes>
                 
