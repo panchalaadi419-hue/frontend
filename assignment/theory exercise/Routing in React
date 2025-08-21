@@ -1,0 +1,20 @@
+question 1: what is react router? how does it handle routing in single-page applications?
+react router is a javascript library for enabling client-side routing in react single-page applications (SPAs). it allows developers to define different URL paths and map them to specific React components, creating the illusion of multiple pages within a single HTML fil
+how it handles routing in SPAs:
+client-side rendering:
+instead of requesting new html  pages from the server for each navigation, react router intercepts navigation requests and dynamically renders the appropriate react components on the client-side based on the url. this provides a fast and smooth user experience
+
+component mapping:
+it uses components like <Route> to define the relationship between a URL path and the component that should be rendered when that path is active
+
+
+question2:explain the difference between BrowserRouter, route, link, and switch components in react router
+BrowserRouter:
+This is the primary router component that wraps our entire application. It uses the HTML5 history API to keep your UI in sync with the URL, enabling navigation without full page reloads.
+
+Route:
+This component defines a mapping between a URL path and a React component. When the URL matches the path prop of a Route, the specified component is rendered.
+Link:
+This component is used to create navigation links within your application. It renders an <a> tag but prevents a full page refresh, allowing React Router to handle the routing internally.
+Switch (or Routes in v6+):
+In older versions of React Router (v5 and below), Switch was used to ensure that only the first matching Route within its children was rendered. In React Router v6 and later, Switch has been replaced by Routes, which serves the same purpose of rendering only one matching route.
