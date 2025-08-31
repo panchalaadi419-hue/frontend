@@ -1,0 +1,61 @@
+                     hooks (usestate, useEffect, usereducer, usememo, useref, usecallback)
+theory exercise:
+question 1:What are React hooks? How do useState() and useEffect() hooks work in functional components
+react hooks are functions that enable functional components to "hook into" react state and lifecycle features, previously only available in class components. they allow the use of stateful logic and side effects within functional components
+usestate()hooks:
+useState() allows functional components to manage state.
+It returns an array containing two elements: the current state value and a function to update that state
+example: const [count, setcount] = usestate(0); initializes count to 0 and provides setcount to update it. calling setcount(newvalue) re-renders the component with the updated state.
+useeffect()hooks:
+useEffect() handles side effects in functional components, such as data fetching, subscriptions, or manual DOM manipulations
+It takes a function (the "effect" function) and an optional dependency array
+It can optionally return a cleanup function, which runs before the component unmounts or before the effect re-runs due to dependency changes 
+
+question 2.What problems did hooks solve in React development? Why are hooks considered an important addition to React
+
+question 3: What is useReducer ? how we use in react app?
+-usereducer is a react hook that provides an alternative to usestate for managing more complex state logic in functional components. It is particularly useful when state transitions involve multiple sub-values or when the next state depends on the previous state
+how to use in a react app: define a reducer function : this  pure function takes the current state and an action as arguments and returns the new state
+-call useReducer: in your component, call useReducer with your reducer function and an initialState. It returns the current state and a dispatch function
+dispatch actions to update state to  trigger state changes, call the dispatch function with an action object. The action object typically has a type property describing the update
+
+
+question 4:What is the purpose of usecallback & usememo hooks?
+-the callback hook memoizes a function, returning a stable reference to the function itself between renders, preventing unnecessary child component re-renders
+-the usememo hook memoizes the result of an expensive computation, returning the cached value instead of re-calculating it on every render. 
+
+booth hooks :optimize performance by avoiding redundant work and are crucial for efficient react applications
+
+usecallback  : purpose :
+to provide a stable reference to a function
+
+ When to use : 
+when you need to pass a stable callback function to a child component that uses  react.memo to  prevent re-renders
+
+How it working : usecallback caches the function definition itself. It returns the same function reference as long as its dependencies haven't changed
+
+usememo  :purpose:
+to cache the result of a computationally expensive function
+
+ when  to use:when a component performs a heavy calculation whose result can be reused across re-renders
+
+ how it woring : usememo stores  the return value of the function passed to it. If the function's dependencies remain the same, useMemo returns the cached result, avoiding the expensive calculation.
+
+question 5:What’s the difference between the usecallback & usememo hooks?
+The  difference between usecallback  and  usememo in  React is what they memoize:
+  usecallback : Memoizes a function. It returns a memoized version of the callback function that only changes if one of its dependencies has changed. This is useful for preventing unnecessary re-renders in child components that receive the function as a prop.
+Usememo : memoizes a value. it returns a memoized value that only recomputes when one of its dependencies changes. This is useful for optimizing expensive calculations or computations within a component.
+
+
+In essence, usecallback is  for optimizing function references, while   usememo  is for optimizing computed values
+
+
+question 6:What is useRef ? How to work in react app?
+- useref is  a react hook that provides a way to create a mutable "ref" object that persists across component re-renders. Unlike usestate updating a  useref  value does not trigger a re-render of the component. 
+
+How to use react app:
+Import useref 
+Import react { useref } from ‘react’;
+Initialize a ref.
+ const  myref = useref (intilize value)
+ initialvalue is  the initial value for the  current property of the ref object. It's often set to  null when referencing a dom  element that isn't available until after the initial render
