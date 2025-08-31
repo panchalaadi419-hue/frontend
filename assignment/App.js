@@ -1,4 +1,7 @@
 import React from "react";
+import Counter from "./navbar component/component/Counter";
+import UserList from "./navbar component/component/Userlist";
+import NestedApp from "./navbar component/component/App";
 // import Hello from "./hello/Hello";
 // import Jsxelem from "./hello/Jsxelem";
 // import Greeting from "./hello/Greeting";
@@ -25,6 +28,10 @@ function App() {
             {/* <Welcome/> */}
             {/* <Usercard name="vivek" age="21" location="ahmedabad"/> */}
             {/*<Counter/>*/}
+             {/* <UserList /> */}
+              <Counter/>
+
+    
 
          <Routes>
                 
