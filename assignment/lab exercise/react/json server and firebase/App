@@ -1,0 +1,205 @@
+import React, { useState, useEffect } from "react";
+
+const API_URL = "http://localhost:3001/users";
+
+ function App() {
+  const [users, setUsers] = useState([]);
+  const [form, setForm] = useState({ name: "", email: "" });
+  const [editId, setEditId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Fetch users from JSON server
+  const fetchUsers = async () => {
+    setLoading(true);
+    setError(null);
+    try {  
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error("Failed to fetch users");
+      const data = await res.json();
+      setUsers(data);
+    } catch (err) {
+      setError(err.message);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  // Handle input change
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  // Add new user or update existing
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.email.trim()) {
+      alert("Please fill all fields");
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    try {
+      const url = editId ? `${API_URL}/${editId}` : API_URL;
+      const method = editId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error("Failed to save user");
+
+      setForm({ name: "", email: "" });
+      setEditId(null);
+      fetchUsers();
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  // Delete user
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure to delete this user?")) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to delete user");
+      fetchUsers();
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  // Patch user email
+  const handlePatch = async (id) => {
+    const newEmail = prompt("Enter new email:");
+    if (!newEmail) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newEmail }),
+      });
+      if (!res.ok) throw new Error("Failed to patch user");
+      fetchUsers();
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  // Prepare form to edit user
+  const handleEdit = (user) => {
+    setForm({ name: user.name, email: user.email });
+    setEditId(user.id);
+  };
+
+  // Cancel editing
+  const handleCancel = () => {
+    setForm({ name: "", email: "" });
+    setEditId(null);
+  };
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h2>User Management (JSON Server + React)</h2>
+
+      {error && (
+        <div style={{ color: "red", marginBottom: 10 }}>
+          <strong>Error: </strong> {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
+        <input
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          placeholder="Name"
+          required
+          style={{ marginRight: 10 }}
+        />
+        <input
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Email"
+          required
+          style={{ marginRight: 10 }}
+          type="email"
+        />
+        <button type="submit" disabled={loading}>
+          {editId ? "Update" : "Add"} User
+        </button>
+        {editId && (
+          <button
+            type="button"
+            onClick={handleCancel}
+            disabled={loading}
+            style={{ marginLeft: 10 }}
+          >
+            Cancel
+          </button>
+        )}
+      </form>
+
+      {loading && <p>Loading...</p>}
+
+      <table
+        border="1"
+        cellPadding="8"
+        cellSpacing="0"
+        style={{ width: "100%", borderCollapse: "collapse" }}
+      >
+        <thead style={{ backgroundColor: "#eee" }}>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions (Edit / Delete / Patch)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {!loading && users.length === 0 && (
+            <tr>
+              <td colSpan="4" style={{ textAlign: "center" }}>
+                No users found
+              </td>
+            </tr>
+          )}
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>
+                <button onClick={() => handleEdit(user)} disabled={loading}>
+                  Edit
+                </button>{" "}
+                <button onClick={() => handleDelete(user.id)} disabled={loading}>
+                  Delete
+                </button>{" "}
+                <button onClick={() => handlePatch(user.id)} disabled={loading}>
+                  Patch Email
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+
+export default App;
