@@ -8,6 +8,7 @@ import NestedApp from "./navbar component/component/App";
 // import Welcome from "./hello/Welcome";
 // import Usercard from "./hello/Usercard";
 // import Counter from "./hello/Counter";
+import DataFetcher from './fet/DataFetcher'
 
 // routing
 import Home from "./routing.jsx/Home";
@@ -29,8 +30,8 @@ function App() {
             {/* <Usercard name="vivek" age="21" location="ahmedabad"/> */}
             {/*<Counter/>*/}
              {/* <UserList /> */}
-              <Counter/>
-
+              // <Counter/>
+               <DataFetcher/>
     
 
          <Routes>
